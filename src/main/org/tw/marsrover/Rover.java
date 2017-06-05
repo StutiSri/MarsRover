@@ -56,4 +56,8 @@ public class Rover {
     public Coordinates getCoordinates() {
         return coordinates;
     }
+
+    public void moveOneGridToTheEast() {
+
+    }
 }

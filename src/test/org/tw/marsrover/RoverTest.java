@@ -33,4 +33,11 @@ public class RoverTest {
         rover.moveOneGridToTheNorth();
         assertEquals(new TestCoordinates(1,3), rover.getCoordinates());
     }
+
+    @Test
+    public void roverShouldMoveOneGridToTheEastAtMCommandWhenItIsFacingEast(){
+        Rover rover = new Rover(new TestCoordinates(1, 2), Compass.East);
+        rover.moveOneGridToTheEast();
+        assertEquals(new TestCoordinates(1,1), rover.getCoordinates());
+    }
 }
