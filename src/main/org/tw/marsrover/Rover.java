@@ -48,4 +48,12 @@ public class Rover {
                 direction = Compass.West;
         }
     }
+
+    public void moveOneGridToTheNorth() {
+
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
 }
