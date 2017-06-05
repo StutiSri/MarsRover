@@ -58,6 +58,6 @@ public class Rover {
     }
 
     public void moveOneGridToTheEast() {
-
+        coordinates = new Coordinates(coordinates.getX() + 1, coordinates.getY() );
     }
 }
