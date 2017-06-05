@@ -21,4 +21,12 @@ public class MarsRoverTest {
         TestRover expected = new TestRover(new Coordinates(3,2), Orientation.W);
         assertEquals(expected, rover);
     }
+    @Test
+    public void shouldMoveRoverInSameDirectionAtCommandM(){
+        TestRover rover = new TestRover(new Coordinates(0,0), Orientation.E);
+        MarsRover marsRover = new MarsRover(new Plateau(new Coordinates(5,5)));
+        marsRover.sendCommandsToRover("M", rover);
+        TestRover expected = new TestRover(new Coordinates(1,0), Orientation.E);
+        assertEquals(expected, rover);
+    }
 }
