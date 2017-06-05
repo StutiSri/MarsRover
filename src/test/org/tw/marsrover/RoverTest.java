@@ -59,6 +59,6 @@ public class RoverTest {
     public void roverShouldMoveOneGridInTheDirectionOfItsCurrentPositionAtCommanM(){
         Rover rover = new Rover(new TestCoordinates(3, 1), Compass.East);
         rover.move();
-        assertEquals(new TestCoordinates(2,1), rover.getCoordinates());
+        assertEquals(new TestCoordinates(4,1), rover.getCoordinates());
     }
 }

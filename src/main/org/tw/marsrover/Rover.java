@@ -70,6 +70,18 @@ public class Rover {
     }
 
     public void move() {
-
+        switch (direction){
+            case East:
+                moveOneGridToTheEast();
+                return;
+            case West:
+                moveOneGridToTheWest();
+                return;
+            case North:
+                moveOneGridToTheNorth();
+                return;
+            case South:
+                moveOneGridToTheSouth();
+        }
     }
 }
