@@ -50,7 +50,7 @@ public class Rover {
     }
 
     public void moveOneGridToTheNorth() {
-
+        coordinates = new Coordinates(coordinates.getX(), coordinates.getY() + 1);
     }
 
     public Coordinates getCoordinates() {

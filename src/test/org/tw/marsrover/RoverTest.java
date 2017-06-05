@@ -29,8 +29,8 @@ public class RoverTest {
 
     @Test
     public void roverShouldMoveOneGridToTheNorthAtMCommandWhenItIsFacingNorth(){
-        Rover rover = new Rover(new Coordinates(1, 2), Compass.North);
+        Rover rover = new Rover(new TestCoordinates(1, 2), Compass.North);
         rover.moveOneGridToTheNorth();
-        assertEquals(new Coordinates(1,3), rover.getCoordinates());
+        assertEquals(new TestCoordinates(1,3), rover.getCoordinates());
     }
 }
