@@ -47,17 +47,35 @@ public class Rover {
 
     public void move() {
         switch (direction){
-            case East:
+            case E:
                 moveOneGridToTheEast();
                 return;
-            case West:
+            case W:
                 moveOneGridToTheWest();
                 return;
-            case North:
+            case N:
                 moveOneGridToTheNorth();
                 return;
-            case South:
+            case S:
                 moveOneGridToTheSouth();
         }
+    }
+
+    public void execute(char command) {
+        switch (command){
+            case 'M':
+                move();
+                return;
+            case 'L':
+                turnNintyDegreesLeft();
+                return;
+            case 'R':
+                turnNintyDegreesRight();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return coordinates.getX() + " " + coordinates.getY() + " " + direction;
     }
 }

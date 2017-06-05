@@ -4,18 +4,18 @@ package org.tw.marsrover;
  * Created by stutis on 6/5/17.
  */
 public enum Orientation {
-    North, East, West, South;
+    N, E, W, S;
 
     static {
-        North.left = West;
-        West.left = South;
-        South.left = East;
-        East.left = North;
+        N.left = W;
+        W.left = S;
+        S.left = E;
+        E.left = N;
 
-        North.right = East;
-        East.right = South;
-        South.right = West;
-        West.right = North;
+        N.right = E;
+        E.right = S;
+        S.right = W;
+        W.right = N;
 
     }
 

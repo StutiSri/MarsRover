@@ -11,7 +11,9 @@ public class MarsRover {
         this.plateau = plateau;
     }
 
-    public void commandRover(String command, Rover rover) {
-
+    public void sendCommandsToRover(String setOfCommands, Rover rover) {
+        char[] commands = setOfCommands.toCharArray();
+        for(char command : commands)
+            rover.execute(command);
     }
 }
