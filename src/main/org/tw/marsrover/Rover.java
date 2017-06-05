@@ -34,6 +34,18 @@ public class Rover {
     }
 
     public void turnNintyDegreesRight() {
-
+        switch (direction){
+            case East:
+                direction = Compass.South;
+                return;
+            case West:
+                direction = Compass.North;
+                return;
+            case North:
+                direction = Compass.East;
+                return;
+            case South:
+                direction = Compass.West;
+        }
     }
 }
