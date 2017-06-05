@@ -14,9 +14,16 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void roverShouldTurnFromEastToNorthAtRCommand(){
+    public void roverShouldTurnFromEastToNorthAtLCommand(){
         Rover rover = new Rover(new Coordinates(1, 2), Compass.East);
         rover.turnNintyDegreesLeft();
         assertEquals(Compass.North, rover.getDirection());
+    }
+
+    @Test
+    public void roverShouldTurnFromSouthToWestAtRCommand(){
+        Rover rover = new Rover(new Coordinates(1, 2), Compass.South);
+        rover.turnNintyDegreesRight();
+        assertEquals(Compass.West, rover.getDirection());
     }
 }

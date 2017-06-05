@@ -32,4 +32,8 @@ public class Rover {
     public Compass getDirection() {
         return direction;
     }
+
+    public void turnNintyDegreesRight() {
+
+    }
 }
