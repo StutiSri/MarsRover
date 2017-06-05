@@ -48,4 +48,10 @@ public class RoverTest {
         assertEquals(new TestCoordinates(1,1), rover.getCoordinates());
     }
 
+    @Test
+    public void roverShouldMoveOneGridToTheWestAtMCommandWhenItIsFacingWest(){
+        Rover rover = new Rover(new TestCoordinates(1, 2), Compass.West);
+        rover.moveOneGridToTheWest();
+        assertEquals(new TestCoordinates(0,2), rover.getCoordinates());
+    }
 }
