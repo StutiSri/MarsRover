@@ -5,7 +5,7 @@ package org.tw.marsrover;
  */
 public class TestRover extends Rover {
     public TestRover(Coordinates coordinates, Orientation direction) {
-        super(coordinates, direction);
+        super(coordinates, direction, new Plateau(5, 5));
     }
 
     @Override

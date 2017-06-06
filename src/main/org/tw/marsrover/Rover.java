@@ -7,7 +7,7 @@ public class Rover {
     private Coordinates coordinates;
     private Orientation direction;
 
-    public Rover(Coordinates coordinates, Orientation direction) {
+    public Rover(Coordinates coordinates, Orientation direction, Plateau plateau) {
 
         this.coordinates = coordinates;
         this.direction = direction;
