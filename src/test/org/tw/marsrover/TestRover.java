@@ -10,8 +10,8 @@ public class TestRover extends Rover {
 
     @Override
     public boolean equals(Object obj) {
-        Rover rover = (Rover)obj;
-        if(!rover.toString().equals(toString()))
+        Rover rover = (Rover) obj;
+        if (!rover.toString().equals(toString()))
             return false;
         return true;
     }

@@ -6,11 +6,13 @@ package org.tw.marsrover;
 public class Rover {
     private Coordinates coordinates;
     private Orientation direction;
+    private Plateau plateau;
 
     public Rover(Coordinates coordinates, Orientation direction, Plateau plateau) {
 
         this.coordinates = coordinates;
         this.direction = direction;
+        this.plateau = plateau;
     }
 
     public void turnNintyDegreesLeft() {
@@ -30,31 +32,31 @@ public class Rover {
     }
 
     public void moveOneGridToTheNorth() {
-        if(coordinates.getY() + 1 > 4)
+        if (coordinates.getY() >= plateau.getUpperCoordinateLimits().getY())
             throw new CoordinatesOutOfBoundsException();
         coordinates = new Coordinates(coordinates.getX(), coordinates.getY() + 1);
     }
 
     public void moveOneGridToTheEast() {
-        if(coordinates.getX() + 1 > 4)
+        if (coordinates.getX() >= plateau.getUpperCoordinateLimits().getX())
             throw new CoordinatesOutOfBoundsException();
-        coordinates = new Coordinates(coordinates.getX() + 1, coordinates.getY() );
+        coordinates = new Coordinates(coordinates.getX() + 1, coordinates.getY());
     }
 
     public void moveOneGridToTheSouth() {
-        if(coordinates.getY() - 1 < 0)
+        if (coordinates.getY() <= plateau.getLowerCoordinateLimits().getY())
             throw new CoordinatesOutOfBoundsException();
         coordinates = new Coordinates(coordinates.getX(), coordinates.getY() - 1);
     }
 
     public void moveOneGridToTheWest() {
-        if(coordinates.getX() - 1 < 0)
+        if (coordinates.getX() <= plateau.getLowerCoordinateLimits().getX())
             throw new CoordinatesOutOfBoundsException();
         coordinates = new Coordinates(coordinates.getX() - 1, coordinates.getY());
     }
 
-    public void move(){
-        switch (direction){
+    public void move() {
+        switch (direction) {
             case E:
                 moveOneGridToTheEast();
                 return;
@@ -70,8 +72,8 @@ public class Rover {
     }
 
 
-    public void execute(char command)  {
-        switch (command){
+    public void execute(char command) {
+        switch (command) {
             case 'M':
                 move();
                 return;
