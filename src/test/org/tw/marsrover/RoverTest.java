@@ -63,8 +63,14 @@ public class RoverTest {
     }
 
     @Test(expected = CoordinatesOutOfBoundsException.class)
-    public void shouldThrowExceptionAtCommandMWhenRoverIsInUpperRightCornerFacingEast(){
-        Rover rover = new Rover(new TestCoordinates(0, 4), Orientation.E);
+    public void shouldThrowExceptionAtCommandMWhenRoverIsInUpperRightCornerFacingWest(){
+        Rover rover = new Rover(new TestCoordinates(0, 4), Orientation.W);
+        rover.move();
+    }
+
+    @Test(expected = CoordinatesOutOfBoundsException.class)
+    public void shouldThrowExceptionAtCommandMWhenRoverIsInUpperRightCornerFacingNorth(){
+        Rover rover = new Rover(new TestCoordinates(0, 4), Orientation.N);
         rover.move();
     }
 }

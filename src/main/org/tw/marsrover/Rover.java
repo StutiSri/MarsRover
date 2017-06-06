@@ -30,24 +30,30 @@ public class Rover {
     }
 
     public void moveOneGridToTheNorth() {
+        if(coordinates.getY() + 1 > 4)
+            throw new CoordinatesOutOfBoundsException();
         coordinates = new Coordinates(coordinates.getX(), coordinates.getY() + 1);
     }
 
     public void moveOneGridToTheEast() {
+        if(coordinates.getX() + 1 > 4)
+            throw new CoordinatesOutOfBoundsException();
         coordinates = new Coordinates(coordinates.getX() + 1, coordinates.getY() );
     }
 
     public void moveOneGridToTheSouth() {
+        if(coordinates.getY() - 1 < 0)
+            throw new CoordinatesOutOfBoundsException();
         coordinates = new Coordinates(coordinates.getX(), coordinates.getY() - 1);
     }
 
     public void moveOneGridToTheWest() {
+        if(coordinates.getX() - 1 < 0)
+            throw new CoordinatesOutOfBoundsException();
         coordinates = new Coordinates(coordinates.getX() - 1, coordinates.getY());
     }
 
     public void move(){
-        if(!canMove())
-            throw new CoordinatesOutOfBoundsException();
         switch (direction){
             case E:
                 moveOneGridToTheEast();
@@ -63,11 +69,6 @@ public class Rover {
         }
     }
 
-    private boolean canMove() {
-        if(coordinates.getX() == 0 && direction == Orientation.E)
-            return false;
-        return true;
-    }
 
     public void execute(char command)  {
         switch (command){
