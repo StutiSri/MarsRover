@@ -45,7 +45,9 @@ public class Rover {
         coordinates = new Coordinates(coordinates.getX() - 1, coordinates.getY());
     }
 
-    public void move() {
+    public void move(){
+        if(!canMove())
+            throw new CoordinatesOutOfBoundsException();
         switch (direction){
             case E:
                 moveOneGridToTheEast();
@@ -61,7 +63,13 @@ public class Rover {
         }
     }
 
-    public void execute(char command) {
+    private boolean canMove() {
+        if(coordinates.getX() == 0 && direction == Orientation.E)
+            return false;
+        return true;
+    }
+
+    public void execute(char command)  {
         switch (command){
             case 'M':
                 move();

@@ -2,9 +2,9 @@ package org.tw.marsrover;
 
 
 public class Plateau {
-    Coordinates coordinateLimits;
+    Coordinates upperCoordinateLimits;
 
-    public Plateau(Coordinates coordinateLimits) {
-        this.coordinateLimits = coordinateLimits;
+    public Plateau(int x, int y) {
+        upperCoordinateLimits = new Coordinates(x, y);
     }
 }

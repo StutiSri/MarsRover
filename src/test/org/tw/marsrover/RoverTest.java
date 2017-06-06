@@ -56,9 +56,15 @@ public class RoverTest {
     }
 
     @Test
-    public void roverShouldMoveOneGridInTheDirectionOfItsCurrentPositionAtCommanM(){
+    public void roverShouldMoveOneGridInTheDirectionOfItsCurrentPositionAtCommandM(){
         Rover rover = new Rover(new TestCoordinates(3, 1), Orientation.E);
         rover.move();
         assertEquals(new TestCoordinates(4,1), rover.getCoordinates());
+    }
+
+    @Test(expected = CoordinatesOutOfBoundsException.class)
+    public void shouldThrowExceptionAtCommandMWhenRoverIsInUpperRightCornerFacingEast(){
+        Rover rover = new Rover(new TestCoordinates(0, 4), Orientation.E);
+        rover.move();
     }
 }
