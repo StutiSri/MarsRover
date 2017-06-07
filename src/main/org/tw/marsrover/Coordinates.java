@@ -1,8 +1,6 @@
 package org.tw.marsrover;
 
-/**
- * Created by stutis on 6/5/17.
- */
+
 public class Coordinates {
     private int y;
     private int x;

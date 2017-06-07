@@ -2,9 +2,6 @@ package org.tw.testhelper;
 
 import org.tw.marsrover.Coordinates;
 
-/**
- * Created by stutis on 6/5/17.
- */
 public class TestCoordinates extends Coordinates {
 
 
@@ -17,8 +14,6 @@ public class TestCoordinates extends Coordinates {
         Coordinates coordinates = (Coordinates) obj;
         if (coordinates.getX() != this.getX())
             return false;
-        if (coordinates.getY() != this.getY())
-            return false;
-        return true;
+        return coordinates.getY() == this.getY();
     }
 }

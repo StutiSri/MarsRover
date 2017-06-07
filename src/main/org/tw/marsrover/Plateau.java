@@ -2,7 +2,7 @@ package org.tw.marsrover;
 
 
 public class Plateau {
-    Coordinates upperCoordinateLimits;
+    private Coordinates upperCoordinateLimits;
     private Coordinates lowerCoordinateLimits;
 
     public Plateau(int x, int y) {

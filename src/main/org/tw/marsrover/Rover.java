@@ -2,9 +2,6 @@ package org.tw.marsrover;
 
 import org.tw.exception.CoordinatesOutOfBoundsException;
 
-/**
- * Created by stutis on 6/5/17.
- */
 public class Rover {
     private Coordinates coordinates;
     private Orientation direction;

@@ -4,9 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Created by stutis on 6/5/17.
- */
 public class MarsRoverStarter {
 
     public static void main(String[] args) {

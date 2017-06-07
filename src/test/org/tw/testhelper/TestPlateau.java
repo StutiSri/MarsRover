@@ -24,9 +24,8 @@ public class TestPlateau extends Plateau {
         TestCoordinates loweCoordinatesForPlateau1 = new TestCoordinates(plateau1.getLowerCoordinateLimits().getX(),
                 plateau1.getLowerCoordinateLimits().getY());;
 
-        if(!loweCoordinatesForPlateau1.equals(loweCoordinatesForPlateau1))
-            return false;
-        return upperCoordinatesForPlateau1.equals(upperCoordinatesForPlateau2);
+        return loweCoordinatesForPlateau1.equals(loweCoordinatesForPlateau1) && upperCoordinatesForPlateau1.equals
+                (upperCoordinatesForPlateau2);
     }
 
 }

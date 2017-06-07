@@ -1,8 +1,5 @@
 package org.tw.marsrover;
 
-/**
- * Created by stutis on 6/5/17.
- */
 public enum Orientation {
     N, E, W, S;
 
