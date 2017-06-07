@@ -6,13 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class MarsRoverStarter {
-
-    public static void main(String[] args) {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
-        marsRoverStarter.processInputForRover(bufferedReader);
-    }
+public class MarsRoverCommander {
 
     public static Plateau getPlateau(String line) {
         String[] upperCoordinateLimits = line.split(" ");
@@ -72,5 +66,10 @@ public class MarsRoverStarter {
         char[] commands = setOfCommands.toCharArray();
         for (char command : commands)
             rover.execute(command);
+    }
+
+    public void start() {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        processInputForRover(bufferedReader);
     }
 }
