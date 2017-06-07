@@ -71,7 +71,8 @@ public class Rover {
     }
 
 
-    public void execute(char command) {
+    public void execute(String setOfCommands) {
+        for(char command : setOfCommands.toCharArray()) {
             switch (command) {
                 case 'M':
                     move();
@@ -82,6 +83,7 @@ public class Rover {
                 case 'R':
                     turnNintyDegreesRight();
             }
+        }
     }
 
     @Override

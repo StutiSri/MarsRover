@@ -27,41 +27,6 @@ public class MarsRoverCommanderTest {
         System.setErr(null);
     }
 
-    @Test
-    public void shouldTurnRoverAtCommandL() {
-        TestRover rover = new TestRover(new Coordinates(1, 2), Orientation.East);
-        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
-        marsRoverCommander.sendCommandsToRover("L", rover);
-        TestRover expected = new TestRover(new Coordinates(1, 2), Orientation.North);
-        assertEquals(expected, rover);
-    }
-
-    @Test
-    public void shouldTurnRoverAtCommandR() {
-        TestRover rover = new TestRover(new Coordinates(3, 2), Orientation.South);
-        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
-        marsRoverCommander.sendCommandsToRover("R", rover);
-        TestRover expected = new TestRover(new Coordinates(3, 2), Orientation.West);
-        assertEquals(expected, rover);
-    }
-
-    @Test
-    public void shouldMoveRoverInSameDirectionAtCommandM() {
-        TestRover rover = new TestRover(new Coordinates(0, 0), Orientation.East);
-        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
-        marsRoverCommander.sendCommandsToRover("M", rover);
-        TestRover expected = new TestRover(new Coordinates(1, 0), Orientation.East);
-        assertEquals(expected, rover);
-    }
-
-    @Test
-    public void shouldMoveRoverAsPerTheCommand() {
-        TestRover rover = new TestRover(new Coordinates(1, 2), Orientation.North);
-        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
-        marsRoverCommander.sendCommandsToRover("LMLMLMLMM", rover);
-        TestRover expected = new TestRover(new Coordinates(1, 3), Orientation.North);
-        assertEquals(expected, rover);
-    }
 
     @Test
     public void shouldReturnOrientationWithStringInputForOrientation() {
@@ -70,38 +35,47 @@ public class MarsRoverCommanderTest {
     }
 
     @Test
-    public void shouldCreateRoverFromStringInput() throws IOException {
+    public void shouldPrintErrorMessageForInvalidOrientation() {
         MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
-        String inputPosition = "1 2 N";
-        TestRover expected = new TestRover(new Coordinates(1,2), Orientation.North);
-        assertEquals(expected, marsRoverCommander.getRover(inputPosition, new Plateau(5,5)));
+        String incorrectOrientation = "G";
+        marsRoverCommander.getOrientation(incorrectOrientation);
+        assertEquals("Incorrect Orientation Provided. Accepted Inputs : N, W, E, S.\nSkipping execution of rover " +
+                "commands.\n", outContent.toString());
     }
 
     @Test
-    public void shouldCreatePlateauFromStringInput(){
+    public void shouldCreateRoverFromStringInput() throws IOException {
+        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
+        String inputPosition = "1 2 N";
+        TestRover expected = new TestRover(new Coordinates(1, 2), Orientation.North);
+        assertEquals(expected, marsRoverCommander.getRover(inputPosition, new Plateau(5, 5)));
+    }
+
+    @Test
+    public void shouldCreatePlateauFromStringInput() {
         MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
         String inputUpperCoordinates = "5 5";
-        TestPlateau expected = new TestPlateau(5,5);
+        TestPlateau expected = new TestPlateau(5, 5);
         assertEquals(expected, marsRoverCommander.getPlateau(inputUpperCoordinates));
     }
 
     @Test
     public void shouldPrintFinalPositionOfEachRoverAfterExecutingCommands() throws IOException {
-       BufferedReader bufferedReader = new BufferedReader(new StringReader("5 5\n1 2 N\nMLR\n2 3 S\nRRR\n\n"));
-       MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
-       marsRoverCommander.processInputForRover(bufferedReader);
-       assertEquals("1 3 N\n2 3 E\n", outContent.toString());
+        BufferedReader bufferedReader = new BufferedReader(new StringReader("5 5\n1 2 N\nMLR\n2 3 S\nRRR\n\n"));
+        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
+        marsRoverCommander.processInputForRover(bufferedReader);
+        assertEquals("1 3 N\n2 3 E\n", outContent.toString());
     }
 
     @Test(expected = IllegalCoordinateException.class)
-    public void shouldThrowIllegalCoordinateExceptionForCoordinateValueLessThanZero(){
+    public void shouldThrowIllegalCoordinateExceptionForCoordinateValueLessThanZero() {
         BufferedReader bufferedReader = new BufferedReader(new StringReader("5 5\n-1 2 N\n"));
         MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
         marsRoverCommander.processInputForRover(bufferedReader);
     }
 
     @Test(expected = IllegalCoordinateException.class)
-    public void shouldThrowIllegalCoordinateExceptionForCoordinateValueGreaterThanPlateauUpperBounds(){
+    public void shouldThrowIllegalCoordinateExceptionForCoordinateValueGreaterThanPlateauUpperBounds() {
         BufferedReader bufferedReader = new BufferedReader(new StringReader("5 5\n1 6 N\n"));
         MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
         marsRoverCommander.processInputForRover(bufferedReader);

@@ -59,13 +59,13 @@ public class MarsRoverCommander {
             return Orientation.West;
         if (roverAttribute.equals("E"))
             return Orientation.East;
+        System.out.println("Incorrect Orientation Provided. Accepted Inputs : N, W, E, S.\n" +
+                "Skipping execution of rover commands.");
         return null;
     }
 
     public void sendCommandsToRover(String setOfCommands, Rover rover) {
-        char[] commands = setOfCommands.toCharArray();
-        for (char command : commands)
-            rover.execute(command);
+        rover.execute(setOfCommands);
     }
 
     public void start() {
