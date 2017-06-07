@@ -8,40 +8,37 @@ import java.io.InputStreamReader;
  * Created by stutis on 6/5/17.
  */
 public class MarsRoverStarter {
-    private Plateau plateau;
-
-    public MarsRoverStarter(Plateau plateau) {
-
-        this.plateau = plateau;
-    }
 
     public static void main(String[] args) {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        MarsRoverStarter marsRoverStarter;
+        MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
         try {
             String line = bufferedReader.readLine();
-            String[] upperCoordinateLimits = line.split(" ");
-            Plateau plateau = new Plateau(Integer.parseInt(upperCoordinateLimits[0]), Integer.parseInt
-                    (upperCoordinateLimits[1]));
-            marsRoverStarter = new MarsRoverStarter(plateau);
-            marsRoverStarter.processInputForRover(bufferedReader);
+            Plateau plateau = getPlateau(line);
+            marsRoverStarter.processInputForRover(bufferedReader, plateau);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void processInputForRover(BufferedReader bufferedReader) throws IOException {
+    public static Plateau getPlateau(String line) {
+        String[] upperCoordinateLimits = line.split(" ");
+        return new Plateau(Integer.parseInt(upperCoordinateLimits[0]), Integer.parseInt
+                (upperCoordinateLimits[1]));
+    }
+
+    public void processInputForRover(BufferedReader bufferedReader, Plateau plateau) throws IOException {
         String line;
-        String[] roverAttributes;
         line = bufferedReader.readLine();
         while (line.length() != 0) {
-            Rover rover = getRover(line);
+            Rover rover = getRover(line, plateau);
             sendCommandsToRover(bufferedReader.readLine(), rover);
+            System.out.println(rover);
             line = bufferedReader.readLine();
         }
     }
 
-    public Rover getRover(String line) {
+    public Rover getRover(String line, Plateau plateau) {
         String[] roverAttributes;
         roverAttributes = line.split(" ");
         Coordinates coordinates = new Coordinates(Integer.parseInt(roverAttributes[0]), Integer
@@ -66,6 +63,5 @@ public class MarsRoverStarter {
         char[] commands = setOfCommands.toCharArray();
         for (char command : commands)
             rover.execute(command);
-        System.out.println(rover);
     }
 }
