@@ -1,5 +1,7 @@
 package org.tw.marsrover;
 
+import org.tw.exception.IllegalCoordinateException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -38,10 +40,19 @@ public class MarsRoverStarter {
     public Rover getRover(String line, Plateau plateau) {
         String[] roverAttributes;
         roverAttributes = line.split(" ");
-        Coordinates coordinates = new Coordinates(Integer.parseInt(roverAttributes[0]), Integer
-                .parseInt(roverAttributes[1]));
+        int xCoordinate = Integer.parseInt(roverAttributes[0]);
+        int yCoordinate = Integer.parseInt(roverAttributes[1]);
+        validateCoordinates(xCoordinate, yCoordinate,plateau);
+        Coordinates coordinates = new Coordinates(xCoordinate, yCoordinate);
         Orientation orientation = getOrientation(roverAttributes[2]);
         return new Rover(coordinates, orientation, plateau);
+    }
+
+    private void validateCoordinates(int xCoordinate, int yCoordinate, Plateau plateau) {
+        if(xCoordinate < 0 || yCoordinate < 0)
+            throw new IllegalCoordinateException();
+        if(xCoordinate > plateau.getUpperCoordinateLimits().getX() || yCoordinate > plateau.getUpperCoordinateLimits().getY())
+            throw new IllegalCoordinateException();
     }
 
     public Orientation getOrientation(String roverAttribute) {

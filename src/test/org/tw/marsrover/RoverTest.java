@@ -87,4 +87,5 @@ public class RoverTest {
         Rover rover = new Rover(new TestCoordinates(5, 0), Orientation.E, new Plateau(5, 5));
         rover.move();
     }
+
 }

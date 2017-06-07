@@ -3,6 +3,7 @@ package org.tw.marsrover;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.tw.exception.IllegalCoordinateException;
 import org.tw.testhelper.TestPlateau;
 import org.tw.testhelper.TestRover;
 
@@ -90,5 +91,19 @@ public class MarsRoverStarterTest {
        MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
        marsRoverStarter.processInputForRover(bufferedReader);
        assertEquals("1 3 N\n2 3 E\n", outContent.toString());
+    }
+
+    @Test(expected = IllegalCoordinateException.class)
+    public void shouldThrowIllegalCoordinateExceptionForCoordinateValueLessThanZero(){
+        BufferedReader bufferedReader = new BufferedReader(new StringReader("5 5\n-1 2 N\n"));
+        MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
+        marsRoverStarter.processInputForRover(bufferedReader);
+    }
+
+    @Test(expected = IllegalCoordinateException.class)
+    public void shouldThrowIllegalCoordinateExceptionForCoordinateValueGreaterThanPlateauUpperBounds(){
+        BufferedReader bufferedReader = new BufferedReader(new StringReader("5 5\n1 6 N\n"));
+        MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
+        marsRoverStarter.processInputForRover(bufferedReader);
     }
 }
