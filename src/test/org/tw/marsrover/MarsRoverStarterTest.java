@@ -3,6 +3,8 @@ package org.tw.marsrover;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.tw.testhelper.TestPlateau;
+import org.tw.testhelper.TestRover;
 
 import java.io.*;
 

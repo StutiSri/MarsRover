@@ -1,4 +1,6 @@
-package org.tw.marsrover;
+package org.tw.testhelper;
+
+import org.tw.marsrover.Coordinates;
 
 /**
  * Created by stutis on 6/5/17.

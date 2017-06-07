@@ -1,4 +1,6 @@
-package org.tw.marsrover;
+package org.tw.testhelper;
+
+import org.tw.marsrover.Plateau;
 
 /**
  * Created by stutis on 6/7/17.

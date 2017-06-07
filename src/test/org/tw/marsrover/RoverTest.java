@@ -1,6 +1,8 @@
 package org.tw.marsrover;
 
 import org.junit.Test;
+import org.tw.exception.CoordinatesOutOfBoundsException;
+import org.tw.testhelper.TestCoordinates;
 
 import static org.junit.Assert.assertEquals;
 
