@@ -1,5 +1,7 @@
 package org.tw.marsrover;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
@@ -7,6 +9,21 @@ import java.io.*;
 import static junit.framework.TestCase.assertEquals;
 
 public class MarsRoverStarterTest {
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+
+    @Before
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
+    }
+
+    @After
+    public void cleanUpStreams() {
+        System.setOut(null);
+        System.setErr(null);
+    }
+
     @Test
     public void shouldTurnRoverAtCommandL() {
         TestRover rover = new TestRover(new Coordinates(1, 2), Orientation.E);
@@ -63,5 +80,13 @@ public class MarsRoverStarterTest {
         String inputUpperCoordinates = "5 5";
         TestPlateau expected = new TestPlateau(5,5);
         assertEquals(expected, marsRoverStarter.getPlateau(inputUpperCoordinates));
+    }
+
+    @Test
+    public void shouldPrintFinalPositionOfEachRoverAfterExecutingCommands() throws IOException {
+       BufferedReader bufferedReader = new BufferedReader(new StringReader("5 5\n1 2 N\nMLR\n2 3 S\nRRR\n\n"));
+       MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
+       marsRoverStarter.processInputForRover(bufferedReader);
+       assertEquals("1 3 N\n2 3 E\n", outContent.toString());
     }
 }

@@ -12,13 +12,7 @@ public class MarsRoverStarter {
     public static void main(String[] args) {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
-        try {
-            String line = bufferedReader.readLine();
-            Plateau plateau = getPlateau(line);
-            marsRoverStarter.processInputForRover(bufferedReader, plateau);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        marsRoverStarter.processInputForRover(bufferedReader);
     }
 
     public static Plateau getPlateau(String line) {
@@ -27,14 +21,20 @@ public class MarsRoverStarter {
                 (upperCoordinateLimits[1]));
     }
 
-    public void processInputForRover(BufferedReader bufferedReader, Plateau plateau) throws IOException {
-        String line;
-        line = bufferedReader.readLine();
-        while (line.length() != 0) {
-            Rover rover = getRover(line, plateau);
-            sendCommandsToRover(bufferedReader.readLine(), rover);
-            System.out.println(rover);
+    public void processInputForRover(BufferedReader bufferedReader) {
+        try {
+            String line = bufferedReader.readLine();
+            Plateau plateau = getPlateau(line);
             line = bufferedReader.readLine();
+            while (line.length() != 0) {
+                Rover rover = getRover(line, plateau);
+                sendCommandsToRover(bufferedReader.readLine(), rover);
+                System.out.println(rover);
+                line = bufferedReader.readLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
