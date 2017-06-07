@@ -1,6 +1,9 @@
 package org.tw.marsrover;
 
 import org.junit.Test;
+import sun.misc.IOUtils;
+
+import java.io.*;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -45,5 +48,13 @@ public class MarsRoverStarterTest {
     public void shouldReturnOrientationWithStringInputForOrientation() {
         MarsRoverStarter marsRoverStarter = new MarsRoverStarter(new Plateau(5, 5));
         assertEquals(Orientation.E, marsRoverStarter.getOrientation("E"));
+    }
+
+    @Test
+    public void shouldCreateRoverFromStringInput() throws IOException {
+        MarsRoverStarter marsRoverStarter = new MarsRoverStarter(new Plateau(5,5));
+        String inputPosition = "1 2 N";
+        TestRover expected = new TestRover(new Coordinates(1,2), Orientation.N);
+        assertEquals(expected, marsRoverStarter.getRover(inputPosition));
     }
 }

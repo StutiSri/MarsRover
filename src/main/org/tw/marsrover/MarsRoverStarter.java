@@ -30,19 +30,24 @@ public class MarsRoverStarter {
         }
     }
 
-    private void processInputForRover(BufferedReader bufferedReader) throws IOException {
+    public void processInputForRover(BufferedReader bufferedReader) throws IOException {
         String line;
         String[] roverAttributes;
         line = bufferedReader.readLine();
         while (line.length() != 0) {
-            roverAttributes = line.split(" ");
-            Coordinates coordinates = new Coordinates(Integer.parseInt(roverAttributes[0]), Integer
-                    .parseInt(roverAttributes[1]));
-            Orientation orientation = getOrientation(roverAttributes[2]);
-            Rover rover = new Rover(coordinates, orientation, plateau);
+            Rover rover = getRover(line);
             sendCommandsToRover(bufferedReader.readLine(), rover);
             line = bufferedReader.readLine();
         }
+    }
+
+    public Rover getRover(String line) {
+        String[] roverAttributes;
+        roverAttributes = line.split(" ");
+        Coordinates coordinates = new Coordinates(Integer.parseInt(roverAttributes[0]), Integer
+                .parseInt(roverAttributes[1]));
+        Orientation orientation = getOrientation(roverAttributes[2]);
+        return new Rover(coordinates, orientation, plateau);
     }
 
     public Orientation getOrientation(String roverAttribute) {
