@@ -29,51 +29,51 @@ public class MarsRoverStarterTest {
 
     @Test
     public void shouldTurnRoverAtCommandL() {
-        TestRover rover = new TestRover(new Coordinates(1, 2), Orientation.E);
+        TestRover rover = new TestRover(new Coordinates(1, 2), Orientation.East);
         MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
         marsRoverStarter.sendCommandsToRover("L", rover);
-        TestRover expected = new TestRover(new Coordinates(1, 2), Orientation.N);
+        TestRover expected = new TestRover(new Coordinates(1, 2), Orientation.North);
         assertEquals(expected, rover);
     }
 
     @Test
     public void shouldTurnRoverAtCommandR() {
-        TestRover rover = new TestRover(new Coordinates(3, 2), Orientation.S);
+        TestRover rover = new TestRover(new Coordinates(3, 2), Orientation.South);
         MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
         marsRoverStarter.sendCommandsToRover("R", rover);
-        TestRover expected = new TestRover(new Coordinates(3, 2), Orientation.W);
+        TestRover expected = new TestRover(new Coordinates(3, 2), Orientation.West);
         assertEquals(expected, rover);
     }
 
     @Test
     public void shouldMoveRoverInSameDirectionAtCommandM() {
-        TestRover rover = new TestRover(new Coordinates(0, 0), Orientation.E);
+        TestRover rover = new TestRover(new Coordinates(0, 0), Orientation.East);
         MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
         marsRoverStarter.sendCommandsToRover("M", rover);
-        TestRover expected = new TestRover(new Coordinates(1, 0), Orientation.E);
+        TestRover expected = new TestRover(new Coordinates(1, 0), Orientation.East);
         assertEquals(expected, rover);
     }
 
     @Test
     public void shouldMoveRoverAsPerTheCommand() {
-        TestRover rover = new TestRover(new Coordinates(1, 2), Orientation.N);
+        TestRover rover = new TestRover(new Coordinates(1, 2), Orientation.North);
         MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
         marsRoverStarter.sendCommandsToRover("LMLMLMLMM", rover);
-        TestRover expected = new TestRover(new Coordinates(1, 3), Orientation.N);
+        TestRover expected = new TestRover(new Coordinates(1, 3), Orientation.North);
         assertEquals(expected, rover);
     }
 
     @Test
     public void shouldReturnOrientationWithStringInputForOrientation() {
         MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
-        assertEquals(Orientation.E, marsRoverStarter.getOrientation("E"));
+        assertEquals(Orientation.East, marsRoverStarter.getOrientation("E"));
     }
 
     @Test
     public void shouldCreateRoverFromStringInput() throws IOException {
         MarsRoverStarter marsRoverStarter = new MarsRoverStarter();
         String inputPosition = "1 2 N";
-        TestRover expected = new TestRover(new Coordinates(1,2), Orientation.N);
+        TestRover expected = new TestRover(new Coordinates(1,2), Orientation.North);
         assertEquals(expected, marsRoverStarter.getRover(inputPosition, new Plateau(5,5)));
     }
 

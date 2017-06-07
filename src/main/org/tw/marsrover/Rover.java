@@ -56,32 +56,32 @@ public class Rover {
 
     public void move() {
         switch (direction) {
-            case E:
+            case East:
                 moveOneGridToTheEast();
                 return;
-            case W:
+            case West:
                 moveOneGridToTheWest();
                 return;
-            case N:
+            case North:
                 moveOneGridToTheNorth();
                 return;
-            case S:
+            case South:
                 moveOneGridToTheSouth();
         }
     }
 
 
     public void execute(char command) {
-        switch (command) {
-            case 'M':
-                move();
-                return;
-            case 'L':
-                turnNintyDegreesLeft();
-                return;
-            case 'R':
-                turnNintyDegreesRight();
-        }
+            switch (command) {
+                case 'M':
+                    move();
+                    return;
+                case 'L':
+                    turnNintyDegreesLeft();
+                    return;
+                case 'R':
+                    turnNintyDegreesRight();
+            }
     }
 
     @Override

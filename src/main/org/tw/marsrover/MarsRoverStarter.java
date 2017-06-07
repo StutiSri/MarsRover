@@ -49,6 +49,7 @@ public class MarsRoverStarter {
     }
 
     private void validateCoordinates(int xCoordinate, int yCoordinate, Plateau plateau) {
+
         if(xCoordinate < 0 || yCoordinate < 0)
             throw new IllegalCoordinateException();
         if(xCoordinate > plateau.getUpperCoordinateLimits().getX() || yCoordinate > plateau.getUpperCoordinateLimits().getY())
@@ -57,13 +58,13 @@ public class MarsRoverStarter {
 
     public Orientation getOrientation(String roverAttribute) {
         if (roverAttribute.equals("N"))
-            return Orientation.N;
+            return Orientation.North;
         if (roverAttribute.equals("S"))
-            return Orientation.S;
+            return Orientation.South;
         if (roverAttribute.equals("W"))
-            return Orientation.W;
+            return Orientation.West;
         if (roverAttribute.equals("E"))
-            return Orientation.E;
+            return Orientation.East;
         return null;
     }
 
