@@ -45,9 +45,11 @@ public class MarsRoverCommander {
     private void validateCoordinates(int xCoordinate, int yCoordinate, Plateau plateau) {
 
         if(xCoordinate < 0 || yCoordinate < 0)
-            throw new IllegalCoordinateException();
+            System.out.print("Incorrect X-Coordinate Provided For Rover. It should be greater than zero and less than" +
+                    " " + plateau.getUpperCoordinateLimits().getX() + ".\nSkipping execution of rover commands.\n");
         if(xCoordinate > plateau.getUpperCoordinateLimits().getX() || yCoordinate > plateau.getUpperCoordinateLimits().getY())
-            throw new IllegalCoordinateException();
+            System.out.print("Incorrect Y-Coordinate Provided For Rover. It should be greater than zero and less than" +
+                    " " + (plateau.getUpperCoordinateLimits().getY() + 1)+".\nSkipping execution of rover commands.\n");
     }
 
     public Orientation getOrientation(String roverAttribute) {

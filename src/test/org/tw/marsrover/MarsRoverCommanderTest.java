@@ -52,6 +52,20 @@ public class MarsRoverCommanderTest {
     }
 
     @Test
+    public void shouldPrintErrorMessageForRoverCoordinatesOutsideBoundary() {
+        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
+        String inputPosition = "-1 2 N";
+        marsRoverCommander.getRover(inputPosition, new Plateau(5, 5));
+        String expectedOutput = "Incorrect X-Coordinate Provided For Rover. It should be greater than zero and less than " +
+                "5.\nSkipping execution of rover commands.\n";
+        inputPosition = "1 6 N";
+        marsRoverCommander.getRover(inputPosition, new Plateau(5, 5));
+        assertEquals(expectedOutput + "Incorrect Y-Coordinate Provided For Rover. It should be greater than zero and " +
+                "less than " +
+                "6.\nSkipping execution of rover commands.\n", outContent.toString());
+    }
+
+    @Test
     public void shouldCreatePlateauFromStringInput() {
         MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
         String inputUpperCoordinates = "5 5";
@@ -65,19 +79,5 @@ public class MarsRoverCommanderTest {
         MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
         marsRoverCommander.processInputForRover(bufferedReader);
         assertEquals("1 3 N\n2 3 E\n", outContent.toString());
-    }
-
-    @Test(expected = IllegalCoordinateException.class)
-    public void shouldThrowIllegalCoordinateExceptionForCoordinateValueLessThanZero() {
-        BufferedReader bufferedReader = new BufferedReader(new StringReader("5 5\n-1 2 N\n"));
-        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
-        marsRoverCommander.processInputForRover(bufferedReader);
-    }
-
-    @Test(expected = IllegalCoordinateException.class)
-    public void shouldThrowIllegalCoordinateExceptionForCoordinateValueGreaterThanPlateauUpperBounds() {
-        BufferedReader bufferedReader = new BufferedReader(new StringReader("5 5\n1 6 N\n"));
-        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
-        marsRoverCommander.processInputForRover(bufferedReader);
     }
 }
