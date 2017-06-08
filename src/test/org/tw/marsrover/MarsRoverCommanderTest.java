@@ -1,9 +1,11 @@
 package org.tw.marsrover;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.tw.exception.IllegalCoordinateException;
+import org.tw.testhelper.TestBoundaryLimits;
+import org.tw.testhelper.TestCoordinates;
 import org.tw.testhelper.TestPlateau;
 import org.tw.testhelper.TestRover;
 
@@ -31,7 +33,8 @@ public class MarsRoverCommanderTest {
     @Test
     public void shouldReturnOrientationWithStringInputForOrientation() {
         MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
-        assertEquals(Orientation.East, marsRoverCommander.getOrientation("E"));
+        String orientationEast = "E";
+        assertEquals(Orientation.East, marsRoverCommander.getOrientation(orientationEast));
     }
 
     @Test
@@ -47,30 +50,30 @@ public class MarsRoverCommanderTest {
     public void shouldCreateRoverFromStringInput() throws IOException {
         MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
         String inputPosition = "1 2 N";
-        TestRover expected = new TestRover(new Coordinates(1, 2), Orientation.North);
-        assertEquals(expected, marsRoverCommander.getRover(inputPosition, new Plateau(5, 5)));
+        TestRover expected = new TestRover(new Position(new Coordinates(1,2, new BoundaryLimits(5,0)),
+                                                Orientation.North));
+        assertEquals(expected, marsRoverCommander.getRover(inputPosition, new BoundaryLimits(5, 0)));
     }
 
     @Test
     public void shouldPrintErrorMessageForRoverCoordinatesOutsideBoundary() {
         MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
         String inputPosition = "-1 2 N";
-        marsRoverCommander.getRover(inputPosition, new Plateau(5, 5));
-        String expectedOutput = "Incorrect X-Coordinate Provided For Rover. It should be greater than zero and less than " +
-                "5.\nSkipping execution of rover commands.\n";
+        marsRoverCommander.getRover(inputPosition, new BoundaryLimits(5, 5));
+        String expectedOutput = "Incorrect Coordinates Provided For Rover. They should be greater than zero and less " +
+                "than 6.\nSkipping execution of rover commands.\n";
         inputPosition = "1 6 N";
-        marsRoverCommander.getRover(inputPosition, new Plateau(5, 5));
-        assertEquals(expectedOutput + "Incorrect Y-Coordinate Provided For Rover. It should be greater than zero and " +
-                "less than " +
-                "6.\nSkipping execution of rover commands.\n", outContent.toString());
+        marsRoverCommander.getRover(inputPosition, new BoundaryLimits(5, 0));
+        assertEquals(expectedOutput + "Incorrect Coordinates Provided For Rover. They should be greater than zero " +
+                "and less than 6.\nSkipping execution of rover commands.\n", outContent.toString());
     }
 
     @Test
-    public void shouldCreatePlateauFromStringInput() {
+    public void shouldCreateBoundaryLimitsFromStringInput() {
         MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
         String inputUpperCoordinates = "5 5";
-        TestPlateau expected = new TestPlateau(5, 5);
-        assertEquals(expected, marsRoverCommander.getPlateau(inputUpperCoordinates));
+        TestBoundaryLimits expected = new TestBoundaryLimits(5, 0);
+        assertEquals(expected, marsRoverCommander.getBoundaryLimits(inputUpperCoordinates));
     }
 
     @Test
@@ -80,4 +83,14 @@ public class MarsRoverCommanderTest {
         marsRoverCommander.processInputForRover(bufferedReader);
         assertEquals("1 3 N\n2 3 E\n", outContent.toString());
     }
+
+    @Test
+    public void shouldPrintErrorMessageForInvalidRoverCommand(){
+        Rover rover = new Rover(new Position(new TestCoordinates(1,2), Orientation.North));
+        rover.runCommands("MMK");
+        String expectedOutput = "Unrecognized Command. Terminating execution of further" +
+                " commands for this rover.";
+        assertEquals(expectedOutput, outContent.toString());
+    }
+
 }

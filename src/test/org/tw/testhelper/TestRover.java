@@ -1,16 +1,14 @@
 package org.tw.testhelper;
 
-import org.tw.marsrover.Coordinates;
-import org.tw.marsrover.Orientation;
-import org.tw.marsrover.Plateau;
+import org.tw.marsrover.Position;
 import org.tw.marsrover.Rover;
 
 /**
  * Created by stutis on 6/5/17.
  */
 public class TestRover extends Rover {
-    public TestRover(Coordinates coordinates, Orientation direction) {
-        super(coordinates, direction, new Plateau(5, 5));
+    public TestRover(Position position) {
+        super(position);
     }
 
     @Override

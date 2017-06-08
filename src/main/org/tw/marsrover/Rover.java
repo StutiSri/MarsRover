@@ -1,93 +1,50 @@
 package org.tw.marsrover;
 
-import org.tw.exception.CoordinatesOutOfBoundsException;
+import static org.tw.marsrover.CommandType.*;
 
 public class Rover {
-    private Coordinates coordinates;
-    private Orientation direction;
-    private Plateau plateau;
+    private Position position;
 
-    public Rover(Coordinates coordinates, Orientation direction, Plateau plateau) {
-
-        this.coordinates = coordinates;
-        this.direction = direction;
-        this.plateau = plateau;
+    public Rover(Position position) {
+        this.position = position;
     }
 
-    public void turnNintyDegreesLeft() {
-        direction = direction.left;
-    }
-
-    public Orientation getDirection() {
-        return direction;
-    }
-
-    public void turnNintyDegreesRight() {
-        direction = direction.right;
-    }
-
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-
-    public void moveOneGridToTheNorth() {
-        if (coordinates.getY() >= plateau.getUpperCoordinateLimits().getY())
-            throw new CoordinatesOutOfBoundsException();
-        coordinates = new Coordinates(coordinates.getX(), coordinates.getY() + 1);
-    }
-
-    public void moveOneGridToTheEast() {
-        if (coordinates.getX() >= plateau.getUpperCoordinateLimits().getX())
-            throw new CoordinatesOutOfBoundsException();
-        coordinates = new Coordinates(coordinates.getX() + 1, coordinates.getY());
-    }
-
-    public void moveOneGridToTheSouth() {
-        if (coordinates.getY() <= plateau.getLowerCoordinateLimits().getY())
-            throw new CoordinatesOutOfBoundsException();
-        coordinates = new Coordinates(coordinates.getX(), coordinates.getY() - 1);
-    }
-
-    public void moveOneGridToTheWest() {
-        if (coordinates.getX() <= plateau.getLowerCoordinateLimits().getX())
-            throw new CoordinatesOutOfBoundsException();
-        coordinates = new Coordinates(coordinates.getX() - 1, coordinates.getY());
-    }
-
-    public void move() {
-        switch (direction) {
-            case East:
-                moveOneGridToTheEast();
-                return;
-            case West:
-                moveOneGridToTheWest();
-                return;
-            case North:
-                moveOneGridToTheNorth();
-                return;
-            case South:
-                moveOneGridToTheSouth();
+    public void runCommands(String setOfCommands) {
+        CommandType commandType;
+        for(char command : setOfCommands.toCharArray()) {
+            commandType = fromCharacter(command);
+            if(commandType == null || execute(commandType) == 0)
+                break;
         }
     }
 
-
-    public void execute(String setOfCommands) {
-        for(char command : setOfCommands.toCharArray()) {
-            switch (command) {
-                case 'M':
-                    move();
-                    return;
-                case 'L':
-                    turnNintyDegreesLeft();
-                    return;
-                case 'R':
-                    turnNintyDegreesRight();
-            }
+    public int execute(CommandType commandType){
+        switch (commandType) {
+            case Move:
+                if(position.move() == null) {
+                    System.out.println("Invalid Move. Rover Going out of Boundary. Terminating execution of " +
+                            "further" +
+                            " commands for this rover.");
+                    return 0;
+                }
+                return 1;
+            case Left:
+                position.turnLeft();
+                return 1;
+            case Right:
+                position.turnRight();
+                return 1;
+            default:
+                return 0;
         }
     }
 
     @Override
     public String toString() {
-        return coordinates.getX() + " " + coordinates.getY() + " " + direction;
+        return position.toString();
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }
