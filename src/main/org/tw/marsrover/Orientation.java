@@ -1,6 +1,5 @@
 package org.tw.marsrover;
 
-import org.omg.CORBA.ORB;
 
 public enum Orientation {
     North("N") {
