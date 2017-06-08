@@ -1,23 +1,30 @@
 package org.tw.marsrover;
 
+import org.omg.CORBA.ORB;
+
 public enum Orientation {
-    North {
+    North("N") {
         public String toString() {
             return "N";
         }
-    }, East{
+    }, East("E"){
         public String toString() {
             return "E";
         }
-    }, West{
+    }, West("W"){
         public String toString() {
             return "W";
         }
-    }, South{
+    }, South("S"){
         public String toString() {
             return "S";
         }
     };
+    private String parameter;
+
+    Orientation(String parameter){
+        this.parameter = parameter;
+    }
 
     static {
         North.left = West;
@@ -35,5 +42,14 @@ public enum Orientation {
     Orientation left;
     Orientation right;
 
+    public static Orientation fromString(String inputOrientation){
+        for(Orientation orientation : Orientation.values()){
+            if(inputOrientation.equals(orientation.parameter))
+                return orientation;
+        }
+        System.out.println("Incorrect Orientation Provided. Accepted Inputs : N, W, E, S.\n" +
+                "Skipping execution of rover commands.");
+        return null;
+    }
 
 }

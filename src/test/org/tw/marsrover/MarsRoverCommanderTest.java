@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.tw.testhelper.TestBoundaryLimits;
 import org.tw.testhelper.TestCoordinates;
-import org.tw.testhelper.TestPlateau;
 import org.tw.testhelper.TestRover;
 
 import java.io.*;
@@ -32,16 +31,14 @@ public class MarsRoverCommanderTest {
 
     @Test
     public void shouldReturnOrientationWithStringInputForOrientation() {
-        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
         String orientationEast = "E";
-        assertEquals(Orientation.East, marsRoverCommander.getOrientation(orientationEast));
+        assertEquals(Orientation.East, Orientation.fromString(orientationEast));
     }
 
     @Test
     public void shouldPrintErrorMessageForInvalidOrientation() {
-        MarsRoverCommander marsRoverCommander = new MarsRoverCommander();
         String incorrectOrientation = "G";
-        marsRoverCommander.getOrientation(incorrectOrientation);
+        Orientation.fromString(incorrectOrientation);
         assertEquals("Incorrect Orientation Provided. Accepted Inputs : N, W, E, S.\nSkipping execution of rover " +
                 "commands.\n", outContent.toString());
     }
