@@ -1,6 +1,5 @@
 package org.tw.marsrover;
 
-import org.tw.exception.CoordinatesOutOfBoundsException;
 
 public class Position {
     private Coordinates coordinates;
