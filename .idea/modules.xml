@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MarsRover.iml" filepath="$PROJECT_DIR$/MarsRover.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MarsRover_main.iml" filepath="$PROJECT_DIR$/.idea/modules/MarsRover_main.iml" group="MarsRover" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MarsRover_test.iml" filepath="$PROJECT_DIR$/.idea/modules/MarsRover_test.iml" group="MarsRover" />
     </modules>
   </component>
 </project>
