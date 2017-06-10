@@ -1,10 +1,9 @@
-package org.tw.starter;
+package org.tw.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.tw.marsrover.MarsRoverCommander;
 
 @Configuration
 @ComponentScan

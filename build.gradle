@@ -15,6 +15,14 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'application'
+apply plugin: 'idea'
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
 
 repositories {
     jcenter()
@@ -24,6 +32,16 @@ war {
     baseName = 'marsrover'
 }
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'marsrover',
+                'Main-Class': 'tw.org.controller.MarsRoverStarte'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 configurations {
     dev
 }
@@ -31,10 +49,10 @@ configurations {
 dependencies {
     testCompile 'junit:junit:4.12'
     dev("org.springframework.boot:spring-boot-devtools")
-    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-controller-web")
     compile("org.thymeleaf:thymeleaf-spring4")
     compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    providedRuntime("org.springframework.boot:spring-boot-controller-tomcat")
 }
 
 bootRun {
