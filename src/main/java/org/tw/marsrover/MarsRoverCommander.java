@@ -1,6 +1,7 @@
 package org.tw.marsrover;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.tw.pojo.RoverData;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,6 +31,13 @@ public class MarsRoverCommander {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String calculateNewRoverPosition(RoverData roverData) {
+        BoundaryLimits boundaryLimits = getBoundaryLimits(roverData.getPlateauUpperCoordinates());
+        Rover rover = getRover(roverData.getRoverCoordinate(), boundaryLimits);
+        sendCommandsToRover(roverData.getCommands(), rover);
+        return rover.toString();
     }
 
     public BoundaryLimits getBoundaryLimits(String line) {

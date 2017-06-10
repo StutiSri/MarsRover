@@ -9,7 +9,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.springframework.boot' version '1.5.3.RELEASE'
+    id "org.springframework.boot" version "1.5.4.RELEASE"
 }
 
 apply plugin: 'java'
@@ -35,7 +35,7 @@ war {
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'marsrover',
-                'Main-Class': 'tw.org.controller.MarsRoverStarte'
+                'Main-Class': 'tw.org.controller.MarsRoverStarter'
     }
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
@@ -49,10 +49,9 @@ configurations {
 dependencies {
     testCompile 'junit:junit:4.12'
     dev("org.springframework.boot:spring-boot-devtools")
-    compile("org.springframework.boot:spring-boot-controller-web")
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.thymeleaf:thymeleaf-spring4")
     compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
-    providedRuntime("org.springframework.boot:spring-boot-controller-tomcat")
 }
 
 bootRun {
