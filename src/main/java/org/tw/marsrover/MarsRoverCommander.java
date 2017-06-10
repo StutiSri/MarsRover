@@ -1,9 +1,12 @@
 package org.tw.marsrover;
 
+import org.springframework.web.bind.annotation.RestController;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@RestController
 public class MarsRoverCommander {
 
     public void start() {
